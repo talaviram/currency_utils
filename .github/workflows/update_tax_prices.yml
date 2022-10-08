@@ -1,0 +1,24 @@
+name: Update Tax Prices
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  check-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+          cache: "pip" # caching pip dependencies
+      - run: pip install -r ./scrapper/requirements.txt
+      - run: ls -la
+      - run: python ./scrapper/scrapper.py
+      - run: ls -la
+      - uses: actions/upload-artifact@v3
+        with:
+          name: us-tax-json-artefact
+          path: ./us_tax.json
+      - run: rm ./us_tax.json
