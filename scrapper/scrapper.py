@@ -92,21 +92,30 @@ def grab_state_web(state_url, state_tax):
     return counties
 
 
-grabbed_tax["states"] = {}
-for row in grab_table("taxBox", local_sales_tax.content):
-    row_content = row.find_all("td")
-    for row_el in row_content:
-        state = row_el.find("a")
-        tax = row_el.find("div")
-        if state and tax:
-            tax_value = clean_percent(tax.text)
-            counties = {
-                "rate": tax_value,
-                "type": "vat",
-                "counties": grab_state_web(state["href"], tax_value),
-            }
-            grabbed_tax["states"].update({states_to_code[state.text]: counties})
+def grab_us_tax_to_dict():
+    grabbed_tax["states"] = {}
+    for row in grab_table("taxBox", local_sales_tax.content):
+        row_content = row.find_all("td")
+        for row_el in row_content:
+            state = row_el.find("a")
+            tax = row_el.find("div")
+            if state and tax:
+                tax_value = clean_percent(tax.text)
+                counties = {
+                    "rate": tax_value,
+                    "type": "vat",
+                    "counties": grab_state_web(state["href"], tax_value),
+                }
+                grabbed_tax["states"].update({states_to_code[state.text]: counties})
+    return grabbed_tax
 
-with open("us_tax.json", "w") as outfile:
-    json.dump(grabbed_tax, outfile)
-    outfile.close()
+
+def main():
+    us_tax_dict = grab_us_tax_to_dict()
+    with open("us_tax.json", "w") as outfile:
+        json.dump(us_tax_dict, outfile)
+        outfile.close()
+
+
+if __name__ == "__main__":
+    main()
