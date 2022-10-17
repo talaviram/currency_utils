@@ -3,6 +3,9 @@ import requests
 from bs4 import BeautifulSoup
 
 local_sales_tax = requests.get("https://www.tax-rates.org/taxtables/local-sales-taxes")
+node_sales_tax = requests.get(
+    "https://raw.githubusercontent.com/valeriansaliou/node-sales-tax/master/res/sales_tax_rates.json"
+)
 
 grabbed_tax = {}
 
@@ -93,7 +96,7 @@ def grab_state_web(state_url, state_tax):
 
 
 def grab_us_tax_to_dict():
-    grabbed_tax["states"] = {}
+    grabbed_tax = {}
     for row in grab_table("taxBox", local_sales_tax.content):
         row_content = row.find_all("td")
         for row_el in row_content:
@@ -106,14 +109,20 @@ def grab_us_tax_to_dict():
                     "type": "vat",
                     "counties": grab_state_web(state["href"], tax_value),
                 }
-                grabbed_tax["states"].update({states_to_code[state.text]: counties})
+                grabbed_tax.update({states_to_code[state.text]: counties})
     return grabbed_tax
+
+
+def grab_node_sales_tax():
+    return json.loads(node_sales_tax.content)
 
 
 def main():
     us_tax_dict = grab_us_tax_to_dict()
-    with open("us_tax.json", "w") as outfile:
-        json.dump(us_tax_dict, outfile)
+    global_tax = grab_node_sales_tax()
+    global_tax["US"]["states"] = us_tax_dict
+    with open("world_sales_tax.json", "w") as outfile:
+        json.dump(global_tax, outfile)
         outfile.close()
 
 
