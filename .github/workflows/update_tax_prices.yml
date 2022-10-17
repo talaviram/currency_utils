@@ -2,7 +2,6 @@ name: Update Tax Prices
 
 on:
   workflow_dispatch:
-  push:
 
 jobs:
   assemble-tax-json:
@@ -21,3 +20,10 @@ jobs:
         with:
           name: sales-tax-json-artefact
           path: ./world_sales_tax.json
+      - name: commit generated tax json
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "no-reply@github.com"
+          git add ./world_sales_tax.json
+          git commit -m "Updated sales tax"
+          git push origin main
