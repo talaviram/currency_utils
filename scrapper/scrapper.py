@@ -69,7 +69,7 @@ states_to_code = {
 def clean_percent(value):
     percentile_pos = value.find("%")
     if percentile_pos >= 0:
-        return float(value[0:percentile_pos])
+        return float(value[0:percentile_pos]) * 0.01
     else:
         return 0.0
 
