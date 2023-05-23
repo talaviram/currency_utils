@@ -1,5 +1,6 @@
 import json
 import requests
+import iso4217_currency_codes
 from bs4 import BeautifulSoup
 
 state_sales_tax = requests.get("https://www.tax-rates.org/taxtables/sales-tax-by-state")
@@ -138,6 +139,7 @@ def main():
     with open("world_sales_tax.json", "w") as outfile:
         json.dump(global_tax, outfile)
         outfile.close()
+    iso4217_currency_codes.generate_iso4217()
 
 
 if __name__ == "__main__":
