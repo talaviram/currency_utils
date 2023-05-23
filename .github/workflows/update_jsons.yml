@@ -1,10 +1,10 @@
-name: Update Tax Prices
+name: Update JSONs
 
 on:
   workflow_dispatch:
 
 jobs:
-  assemble-tax-json:
+  assemble-jsons:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,11 +18,11 @@ jobs:
       - run: ls -la
       - uses: actions/upload-artifact@v3
         with:
-          name: sales-tax-json-artefact
+          name: jsons-artefact
           path: |
             ./world_sales_tax.json
             ./iso4217_currency_codes.json
-      - name: commit generated tax json
+      - name: commit generated jsons
         run: |
           git config user.name "GitHub Actions"
           git config user.email "no-reply@github.com"
