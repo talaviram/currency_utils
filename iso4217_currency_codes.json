@@ -182,10 +182,7 @@
         },
         "BO": {
             "country_name": "BOLIVIA (PLURINATIONAL STATE OF)",
-            "currency_name": {
-                "@IsFund": "true",
-                "#text": "Mvdol"
-            },
+            "currency_name": "Mvdol",
             "iso_code": "BOV",
             "iso_number": "984",
             "minor_units": "2"
@@ -311,10 +308,7 @@
         },
         "CL": {
             "country_name": "CHILE",
-            "currency_name": {
-                "@IsFund": "true",
-                "#text": "Unidad de Fomento"
-            },
+            "currency_name": "Unidad de Fomento",
             "iso_code": "CLF",
             "iso_number": "990",
             "minor_units": "4"
@@ -342,10 +336,7 @@
         },
         "CO": {
             "country_name": "COLOMBIA",
-            "currency_name": {
-                "@IsFund": "true",
-                "#text": "Unidad de Valor Real"
-            },
+            "currency_name": "Unidad de Valor Real",
             "iso_code": "COU",
             "iso_number": "970",
             "minor_units": "2"
@@ -1024,10 +1015,7 @@
         },
         "MX": {
             "country_name": "MEXICO",
-            "currency_name": {
-                "@IsFund": "true",
-                "#text": "Mexican Unidad de Inversion (UDI)"
-            },
+            "currency_name": "Mexican Unidad de Inversion (UDI)",
             "iso_code": "MXV",
             "iso_number": "979",
             "minor_units": "2"
@@ -1518,10 +1506,7 @@
         },
         "CH": {
             "country_name": "SWITZERLAND",
-            "currency_name": {
-                "@IsFund": "true",
-                "#text": "WIR Franc"
-            },
+            "currency_name": "WIR Franc",
             "iso_code": "CHW",
             "iso_number": "948",
             "minor_units": "2"
@@ -1668,10 +1653,7 @@
         },
         "US": {
             "country_name": "UNITED STATES OF AMERICA (THE)",
-            "currency_name": {
-                "@IsFund": "true",
-                "#text": "US Dollar (Next day)"
-            },
+            "currency_name": "US Dollar (Next day)",
             "iso_code": "USN",
             "iso_number": "997",
             "minor_units": "2"
@@ -1859,6 +1841,57 @@
             "iso_code": "XAG",
             "iso_number": "961",
             "minor_units": "N.A."
+        }
+    },
+    "funds": {
+        "BO": {
+            "country_name": "BOLIVIA (PLURINATIONAL STATE OF)",
+            "currency_name": "Mvdol",
+            "iso_code": "BOV",
+            "iso_number": "984",
+            "minor_units": "2"
+        },
+        "CL": {
+            "country_name": "CHILE",
+            "currency_name": "Unidad de Fomento",
+            "iso_code": "CLF",
+            "iso_number": "990",
+            "minor_units": "4"
+        },
+        "CO": {
+            "country_name": "COLOMBIA",
+            "currency_name": "Unidad de Valor Real",
+            "iso_code": "COU",
+            "iso_number": "970",
+            "minor_units": "2"
+        },
+        "MX": {
+            "country_name": "MEXICO",
+            "currency_name": "Mexican Unidad de Inversion (UDI)",
+            "iso_code": "MXV",
+            "iso_number": "979",
+            "minor_units": "2"
+        },
+        "CH": {
+            "country_name": "SWITZERLAND",
+            "currency_name": "WIR Franc",
+            "iso_code": "CHW",
+            "iso_number": "948",
+            "minor_units": "2"
+        },
+        "US": {
+            "country_name": "UNITED STATES OF AMERICA (THE)",
+            "currency_name": "US Dollar (Next day)",
+            "iso_code": "USN",
+            "iso_number": "997",
+            "minor_units": "2"
+        },
+        "UY": {
+            "country_name": "URUGUAY",
+            "currency_name": "Uruguay Peso en Unidades Indexadas (UI)",
+            "iso_code": "UYI",
+            "iso_number": "940",
+            "minor_units": "0"
         }
     }
 }
