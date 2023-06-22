@@ -182,9 +182,9 @@
         },
         "BO": {
             "country_name": "BOLIVIA (PLURINATIONAL STATE OF)",
-            "currency_name": "Mvdol",
-            "iso_code": "BOV",
-            "iso_number": "984",
+            "currency_name": "Boliviano",
+            "iso_code": "BOB",
+            "iso_number": "068",
             "minor_units": "2"
         },
         "BQ": {
@@ -308,10 +308,10 @@
         },
         "CL": {
             "country_name": "CHILE",
-            "currency_name": "Unidad de Fomento",
-            "iso_code": "CLF",
-            "iso_number": "990",
-            "minor_units": "4"
+            "currency_name": "Chilean Peso",
+            "iso_code": "CLP",
+            "iso_number": "152",
+            "minor_units": "0"
         },
         "CN": {
             "country_name": "CHINA",
@@ -336,9 +336,9 @@
         },
         "CO": {
             "country_name": "COLOMBIA",
-            "currency_name": "Unidad de Valor Real",
-            "iso_code": "COU",
-            "iso_number": "970",
+            "currency_name": "Colombian Peso",
+            "iso_code": "COP",
+            "iso_number": "170",
             "minor_units": "2"
         },
         "KM": {
@@ -501,13 +501,6 @@
             "iso_code": "ETB",
             "iso_number": "230",
             "minor_units": "2"
-        },
-        "null": {
-            "country_name": "ZZ11_Silver",
-            "currency_name": "Silver",
-            "iso_code": "XAG",
-            "iso_number": "961",
-            "minor_units": "N.A."
         },
         "FK": {
             "country_name": "FALKLAND ISLANDS (THE) [MALVINAS]",
@@ -1015,9 +1008,9 @@
         },
         "MX": {
             "country_name": "MEXICO",
-            "currency_name": "Mexican Unidad de Inversion (UDI)",
-            "iso_code": "MXV",
-            "iso_number": "979",
+            "currency_name": "Mexican Peso",
+            "iso_code": "MXN",
+            "iso_number": "484",
             "minor_units": "2"
         },
         "FM": {
@@ -1506,9 +1499,9 @@
         },
         "CH": {
             "country_name": "SWITZERLAND",
-            "currency_name": "WIR Franc",
-            "iso_code": "CHW",
-            "iso_number": "948",
+            "currency_name": "Swiss Franc",
+            "iso_code": "CHF",
+            "iso_number": "756",
             "minor_units": "2"
         },
         "SY": {
@@ -1653,9 +1646,9 @@
         },
         "US": {
             "country_name": "UNITED STATES OF AMERICA (THE)",
-            "currency_name": "US Dollar (Next day)",
-            "iso_code": "USN",
-            "iso_number": "997",
+            "currency_name": "US Dollar",
+            "iso_code": "USD",
+            "iso_number": "840",
             "minor_units": "2"
         },
         "UY": {
