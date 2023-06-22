@@ -86,7 +86,8 @@ def clean_xml(currency_list, last_update):
             cleaned_list["funds"][possible_symbol] = new_dict
         elif possible_symbol == None:
             cleaned_list["state_currencies"][new_dict["country_name"]] = new_dict
-        cleaned_list["countries"][possible_symbol] = new_dict
+        else:
+            cleaned_list["countries"][possible_symbol] = new_dict
     return cleaned_list
 
 
