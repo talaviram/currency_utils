@@ -83,12 +83,21 @@ def clean_xml(currency_list, last_update):
         ):
             # the XML contains also funded forms
             new_dict["currency_name"] = new_dict["currency_name"]["#text"]
-            cleaned_list["funds"][possible_symbol] = new_dict
+            insert_or_append(new_dict["country_name"], cleaned_list["funds"], new_dict)
         elif possible_symbol == None:
-            cleaned_list["state_currencies"][new_dict["country_name"]] = new_dict
+            insert_or_append(
+                new_dict["country_name"], cleaned_list["state_currencies"], new_dict
+            )
         else:
-            cleaned_list["countries"][possible_symbol] = new_dict
+            insert_or_append(possible_symbol, cleaned_list["countries"], new_dict)
     return cleaned_list
+
+
+def insert_or_append(country_iso, dict, currency_item):
+    if country_iso in dict:
+        dict[country_iso].append(currency_item)
+    else:
+        dict[country_iso] = [currency_item]
 
 
 def generate_iso4217():
