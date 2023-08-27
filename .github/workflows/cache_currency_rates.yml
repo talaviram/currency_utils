@@ -1,0 +1,37 @@
+name: Download Rates from exchangerate.host
+
+on:
+  schedule:
+    - cron: "0 8 * * *" # This schedule runs the workflow every day at 8:00am UTC
+  workflow_dispatch:
+
+jobs:
+  download-test-cache-currencies:
+    runs-on: ubuntu-latest
+    env:
+        DATE: 
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: set -e
+      - name: Get current date
+        id: date
+        run: echo "CURRENT_DATE=$(date -I)" >> $GITHUB_ENV
+      - name: Get rates from api.exchangerate.host
+        run: curl -o latest_rates.json -s -XGET 'https://api.exchangerate.host/latest'
+      - name: Test if downloaded rates are valid
+        run: python ./scrapper/test_rates.py
+      - uses: actions/upload-artifact@v3
+        with:
+          name: jsons-artefact
+          path: |
+            ./latest_rates.json
+      - name: commit generated jsons
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "no-reply@github.com"
+          git add ./latest_rates.json
+          git commit -m "Update Exchange Rates $CURRENT_DATE"
+          git push origin main
