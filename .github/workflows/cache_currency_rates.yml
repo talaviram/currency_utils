@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
         DATE: 
+        API_KEY: ${{ secrets.EXCHANGE_RATE_API_KEY }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -19,8 +20,8 @@ jobs:
       - name: Get current date
         id: date
         run: echo "CURRENT_DATE=$(date -I)" >> $GITHUB_ENV
-      - name: Get rates from api.exchangerate.host
-        run: curl -o latest_rates.json -s -XGET 'https://api.exchangerate.host/latest'
+      - name: Get rates from api.exchangeratesapi.io
+        run: curl -o latest_rates.json -s -XGET "http://api.exchangeratesapi.io/v1/latest?access_key=$API_KEY"
       - name: Test if downloaded rates are valid
         run: python ./scrapper/test_rates.py
       - uses: actions/upload-artifact@v3
