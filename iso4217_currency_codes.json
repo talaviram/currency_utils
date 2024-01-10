@@ -1,5 +1,5 @@
 {
-    "last_update": "2023-01-01",
+    "last_update": "2024-01-01",
     "countries": {
         "AF": [
             {
@@ -1836,13 +1836,6 @@
             }
         ],
         "SL": [
-            {
-                "country_name": "SIERRA LEONE",
-                "currency_name": "Leone",
-                "iso_code": "SLL",
-                "iso_number": "694",
-                "minor_units": "2"
-            },
             {
                 "country_name": "SIERRA LEONE",
                 "currency_name": "Leone",
