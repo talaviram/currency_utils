@@ -1,0 +1,34 @@
+name: Scrap Most Traded Currencies from Wikipedia
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download-currencies-rank:
+    runs-on: ubuntu-latest
+    env:
+        DATE:
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - run: set -e
+      - name: Get current date
+        id: date
+        run: echo "CURRENT_DATE=$(date)" >> $GITHUB_ENV
+      - name: Scrap currencies ranking from Wikipedia
+        run: pip install -r ./scrapper/requirements.txt
+             python ./scrapper/top_currency_wiki_scrapper.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jsons-artefact
+          path: |
+            ./top_currencies.json
+      - name: commit generated jsons
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "no-reply@github.com"
+          git add ./top_currencies.json
+          git commit -m "Top Currencies Ranked $DATE"
+          git push origin main

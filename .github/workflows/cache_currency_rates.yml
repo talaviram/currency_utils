@@ -24,7 +24,7 @@ jobs:
         run: curl -o downloaded_rates.json -s -XGET "https://api.currencybeacon.com/v1/latest?api_key=$API_KEY&base=EUR"
       - name: Test if downloaded rates are valid
         run: python ./scrapper/format_and_test_downloaded_rates.py
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: jsons-artefact
           path: |
