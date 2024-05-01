@@ -18,8 +18,7 @@ jobs:
         id: date
         run: echo "CURRENT_DATE=$(date)" >> $GITHUB_ENV
       - name: Scrap currencies ranking from Wikipedia
-        run: pip install -r ./scrapper/requirements.txt
-             python ./scrapper/top_currency_wiki_scrapper.py
+        run: pip install -r ./scrapper/requirements.txt && python ./scrapper/top_currency_wiki_scrapper.py
       - uses: actions/upload-artifact@v4
         with:
           name: jsons-artefact
