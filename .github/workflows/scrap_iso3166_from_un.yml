@@ -28,6 +28,6 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "no-reply@github.com"
-          git add ./top_currencies.json
+          git add ./countries_iso3166_m49.json
           git commit -m "ISO3166 (2/3 alpha) and UN M49 - $DATE"
           git push origin main
