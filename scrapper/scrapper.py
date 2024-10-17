@@ -91,7 +91,7 @@ def grab_state_web(state_url, state_tax):
             tax = row_el.find("div")
             if county and tax:
                 counties[county.text] = {
-                    "rate": float("%.2f" % (clean_percent(tax.text) - state_tax)),
+                    "rate": float("%.4f" % (clean_percent(tax.text) - state_tax)),
                     "type": "vat",
                 }
     return counties
