@@ -1,5 +1,5 @@
 {
-    "last_update": "2024-01-01",
+    "last_update": "2024-06-25",
     "countries": {
         "AF": [
             {
@@ -2290,9 +2290,9 @@
         "ZW": [
             {
                 "country_name": "ZIMBABWE",
-                "currency_name": "Zimbabwe Dollar",
-                "iso_code": "ZWL",
-                "iso_number": "932",
+                "currency_name": "Zimbabwe Gold",
+                "iso_code": "ZWG",
+                "iso_number": "924",
                 "minor_units": "2"
             }
         ]
