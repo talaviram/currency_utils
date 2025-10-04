@@ -11,6 +11,7 @@ url = "https://www.six-group.com/dam/download/financial-information/data-center/
 def get_relevant_alpha2_for_country(country):
     country = country.upper()
     non_country_currencies = [
+        "ARAB MONETARY FUND"
         "EUROPEAN UNION",
         "INTERNATIONAL MONETARY FUND (IMF)",
         "MEMBER COUNTRIES OF THE AFRICAN DEVELOPMENT BANK GROUP",
