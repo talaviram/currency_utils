@@ -1,5 +1,5 @@
 {
-    "last_update": "2024-06-25",
+    "last_update": "2025-05-12",
     "countries": {
         "AF": [
             {
@@ -516,20 +516,13 @@
                 "iso_code": "CUP",
                 "iso_number": "192",
                 "minor_units": "2"
-            },
-            {
-                "country_name": "CUBA",
-                "currency_name": "Peso Convertible",
-                "iso_code": "CUC",
-                "iso_number": "931",
-                "minor_units": "2"
             }
         ],
         "CW": [
             {
                 "country_name": "CURAÇAO",
-                "currency_name": "Netherlands Antillean Guilder",
-                "iso_code": "ANG",
+                "currency_name": "Caribbean Guilder",
+                "iso_code": "XCG",
                 "iso_number": "532",
                 "minor_units": "2"
             }
@@ -1856,8 +1849,8 @@
         "SX": [
             {
                 "country_name": "SINT MAARTEN (DUTCH PART)",
-                "currency_name": "Netherlands Antillean Guilder",
-                "iso_code": "ANG",
+                "currency_name": "Caribbean Guilder",
+                "iso_code": "XCG",
                 "iso_number": "532",
                 "minor_units": "2"
             }
@@ -2298,6 +2291,15 @@
         ]
     },
     "state_currencies": {
+        "ARAB MONETARY FUND": [
+            {
+                "country_name": "ARAB MONETARY FUND",
+                "currency_name": "Arab Accounting Dinar",
+                "iso_code": "XAD",
+                "iso_number": "396",
+                "minor_units": "2"
+            }
+        ],
         "EUROPEAN UNION": [
             {
                 "country_name": "EUROPEAN UNION",
