@@ -1,5 +1,5 @@
 {
-    "last_update": "2025-05-12",
+    "last_update": "2026-01-01",
     "countries": {
         "AF": [
             {
@@ -314,9 +314,9 @@
         "BG": [
             {
                 "country_name": "BULGARIA",
-                "currency_name": "Bulgarian Lev",
-                "iso_code": "BGN",
-                "iso_number": "975",
+                "currency_name": "Euro",
+                "iso_code": "EUR",
+                "iso_number": "978",
                 "minor_units": "2"
             }
         ],
