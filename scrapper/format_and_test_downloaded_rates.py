@@ -18,6 +18,10 @@ formatted["timestamp"] = epoch
 formatted["date"] = datetime.date.fromtimestamp(epoch).strftime("%Y-%m-%d")
 formatted["base"] = rates["response"]["base"]
 formatted["rates"] = rates["response"]["rates"]
+if "BYN" not in formatted["rates"] and "BYR" in formatted["rates"]:
+    formatted["rates"]["BYN"] = formatted["rates"]["BYR"] / 10000
+elif "BYR" not in formatted["rates"] and "BYN" in formatted["rates"]:
+    formatted["rates"]["BYR"] = formatted["rates"]["BYN"] * 10000
 current_date = datetime.date.today().strftime("%Y-%m-%d")
 assert formatted["date"] == current_date
 for currency in supported["symbols"]:
