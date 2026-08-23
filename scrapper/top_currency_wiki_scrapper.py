@@ -1,22 +1,50 @@
-# obtain top currencies from https://en.wikipedia.org/wiki/Template:Most_traded_currencies
-import datetime
+# Obtain top currencies from https://en.wikipedia.org/wiki/Template:Most_traded_currencies
 import json
+import re
+
 import requests as rq
 from bs4 import BeautifulSoup
 
 
+URL = "https://en.wikipedia.org/wiki/Template:Most_traded_currencies"
+ISO_CODE = re.compile(r"[A-Z]{3}")
+HEADERS = {
+    "User-Agent": "currency-utils/1.0 (https://github.com/talaviram/currency_utils)"
+}
+
+
 def get_currency_data():
-    url = "https://en.wikipedia.org/wiki/Template:Most_traded_currencies"
-    response = rq.get(url)
+    response = rq.get(URL, headers=HEADERS, timeout=30)
+    response.raise_for_status()
     soup = BeautifulSoup(response.content, "html.parser")
-    tbody = soup.find("tbody")
-    rows = tbody.find_all("tr")
+
+    table = next(
+        (
+            candidate
+            for candidate in soup.find_all("table")
+            if (caption := candidate.find("caption"))
+            and "Most traded currencies by value" in caption.get_text(" ", strip=True)
+        ),
+        None,
+    )
+    if table is None:
+        raise ValueError("Could not find the most-traded-currencies table")
+
     currency_dict = {}
-    for row in range(2, len(rows) - 2):
-        cells = rows[row].find_all("td")
-        rank = int(cells[0].text)
-        iso = cells[2].text
-        currency_dict[iso] = rank
+    for row in table.select("tbody > tr"):
+        cells = row.find_all("td", recursive=False)
+        if len(cells) < 2:
+            continue
+
+        iso = cells[1].get_text(strip=True)
+        if not ISO_CODE.fullmatch(iso):
+            continue
+
+        currency_dict[iso] = len(currency_dict) + 1
+
+    if not currency_dict:
+        raise ValueError("Could not extract any currency codes from the ranking table")
+
     return currency_dict
 
 
