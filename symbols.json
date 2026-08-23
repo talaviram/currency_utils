@@ -393,6 +393,10 @@
             "code": "MOP",
             "description": "Macanese Pataca"
         },
+        "MRO": {
+            "code": "MRO",
+            "description": "Mauritanian Ouguiya"
+        },
         "MUR": {
             "code": "MUR",
             "description": "Mauritian Rupee"
@@ -536,6 +540,10 @@
         "SRD": {
             "code": "SRD",
             "description": "Surinamese Dollar"
+        },
+        "SSP": {
+            "code": "SSP",
+            "description": "South Sudanese Pound"
         },
         "STD": {
             "code": "STD",
