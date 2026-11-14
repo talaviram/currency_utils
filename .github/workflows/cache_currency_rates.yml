@@ -5,26 +5,37 @@ on:
     - cron: "0 * * * *" # workflow every hour
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+concurrency:
+  group: currency-data-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   download-test-cache-currencies:
-    runs-on: ubuntu-latest
-    env:
-        DATE: 
-        API_KEY: ${{ secrets.CURRENCY_BEACON_API_KEY }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.3.3
         with:
-          python-version: "3.9"
-      - run: set -e
+          version: "0.13.8"
+          enable-cache: true
+      - name: Install Python and locked dependencies
+        run: |
+          uv python install
+          uv sync --locked
       - name: Get current date
         id: date
         run: echo "CURRENT_DATE=$(date)" >> $GITHUB_ENV
       - name: Get rates from api.currencybeacon.com
-        run: curl -o downloaded_rates.json -s -XGET "https://api.currencybeacon.com/v1/latest?api_key=$API_KEY&base=EUR"
+        env:
+          API_KEY: ${{ secrets.CURRENCY_BEACON_API_KEY }}
+        run: curl --fail --silent --show-error --retry 3 --connect-timeout 15 --max-time 120 -o downloaded_rates.json "https://api.currencybeacon.com/v1/latest?api_key=$API_KEY&base=EUR"
       - name: Test if downloaded rates are valid
-        run: python ./scrapper/format_and_test_downloaded_rates.py
-      - uses: actions/upload-artifact@v4
+        run: uv run --locked python ./scrapper/format_and_test_downloaded_rates.py
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: jsons-artefact
           path: |
@@ -34,5 +45,7 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "no-reply@github.com"
           git add ./latest_rates.json
-          git commit -m "Update Exchange Rates $CURRENT_DATE"
-          git push origin main
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Exchange Rates $CURRENT_DATE"
+            git push origin main
+          fi

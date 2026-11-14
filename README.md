@@ -11,3 +11,17 @@ Currently it has:
 - [top_currencies.json](https://raw.githubusercontent.com/talaviram/currency_utils/main/top_currencies.json) - Most traded currencies ranked from [Wikipedia](https://en.wikipedia.org/wiki/Template:Most_traded_currencies)
 - [eu_member_countries.json](https://raw.githubusercontent.com/talaviram/currency_utils/main/eu_member_countries.json) - minified EU member countries as alpha2.
 - [latest_rates.json](https://raw.githubusercontent.com/talaviram/currency_utils/main/latest_rates.json) - exchange rates cached from https://currencybeacon.com
+
+The GitHub Actions workflows use Python from `.python-version` and install
+dependencies from `uv.lock` with `uv sync --locked`. To use the same environment
+locally, install [uv](https://docs.astral.sh/uv/), then run:
+
+```sh
+uv python install
+uv sync --locked
+uv run --locked python scrapper/top_currency_wiki_scrapper.py
+```
+
+CI pins Ubuntu and its action and uv versions so runner image changes do not
+silently change the environment. Data update workflows share a concurrency group
+to serialize their commits, and skip committing when the generated files match.

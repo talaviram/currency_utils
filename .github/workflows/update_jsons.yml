@@ -3,20 +3,29 @@ name: Update JSONs
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+concurrency:
+  group: currency-data-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   assemble-jsons:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.3.3
         with:
-          python-version: "3.9"
-          cache: "pip" # caching pip dependencies
-      - run: pip install -r ./scrapper/requirements.txt
-      - run: ls -la
-      - run: python ./scrapper/scrapper.py
-      - run: ls -la
-      - uses: actions/upload-artifact@v4
+          version: "0.13.8"
+          enable-cache: true
+      - name: Install Python and locked dependencies
+        run: |
+          uv python install
+          uv sync --locked
+      - run: uv run --locked python ./scrapper/scrapper.py
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: jsons-artefact
           path: |
@@ -28,5 +37,7 @@ jobs:
           git config user.email "no-reply@github.com"
           git add ./world_sales_tax.json
           git add ./iso4217_currency_codes.json
-          git commit -m "Updated JSONs"
-          git push origin main
+          if ! git diff --cached --quiet; then
+            git commit -m "Updated JSONs"
+            git push origin main
+          fi

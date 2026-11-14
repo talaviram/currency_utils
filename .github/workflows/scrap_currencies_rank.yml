@@ -6,20 +6,29 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: currency-data-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   download-currencies-rank:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.3.3
         with:
-          python-version: "3.9"
-      - run: set -e
+          version: "0.13.8"
+          enable-cache: true
+      - name: Install Python and locked dependencies
+        run: |
+          uv python install
+          uv sync --locked
       - name: Get current date
         run: echo "DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
       - name: Scrap currencies ranking from Wikipedia
-        run: pip install -r ./scrapper/requirements.txt && python ./scrapper/top_currency_wiki_scrapper.py
-      - uses: actions/upload-artifact@v4
+        run: uv run --locked python ./scrapper/top_currency_wiki_scrapper.py
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: jsons-artefact
           path: |
